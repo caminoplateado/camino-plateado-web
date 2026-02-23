@@ -4,26 +4,29 @@
     "titulo": "Distribución Demográfica Regional",
     "tipo": "mapa",
     "descripcion": "Mapa interactivo sobre la densidad de población +50 en centros urbanos.",
-    "miniatura": "assets/thumb-mapa.jpg",
-    "url": "assets/placeholder-mapa.html",
-    "size": "screen"
+    "miniatura": "assets/img/recursos/thumb-mapa.jpg",
+    "url": "assets/placeholders/placeholder-mapa.html",
+    "size": "screen",
+    "slug": "mapa-demografia-regional"
   },
   {
     "id": 2,
     "titulo": "Tablero de Consumo Silver",
     "tipo": "bi",
     "descripcion": "Dashboard de Power BI con participación de consumo por sectores.",
-    "miniatura": "assets/thumb-bi.jpg",
-    "url": "assets/placeholder-bi.html",
-    "size": "full"
+    "miniatura": "assets/img/recursos/thumb-bi.jpg",
+    "url": "assets/placeholders/placeholder-bi.html",
+    "size": "full",
+    "slug": "tablero-consumo-silver"
   },
   {
     "id": 3,
     "titulo": "Informe: Ciudades Amigables",
     "tipo": "pdf",
     "descripcion": "Análisis de infraestructura en los 3 casos testigo analizados.",
-    "miniatura": "assets/thumb-pdf.jpg",
-    "url": "assets/informe-marzo.pdf",
-    "size": "xl"
+    "miniatura": "assets/img/recursos/thumb-pdf.jpg",
+    "url": "assets/pdfs/informe-marzo.pdf",
+    "size": "xl",
+    "slug": "informe-ciudades-amigables"
   }
 ]

@@ -18,8 +18,8 @@
       titulo: "Distribución Demográfica Regional",
       tipo: "mapa",
       descripcion: "Mapa interactivo sobre la densidad de población +50 en centros urbanos.",
-      miniatura: "assets/thumb-mapa.jpg",
-      url: "assets/placeholder-mapa.html",
+      miniatura: "assets/img/recursos/thumb-mapa.jpg",
+      url: "assets/placeholders/placeholder-mapa.html",
       size: "screen",
     },
     {
@@ -27,8 +27,8 @@
       titulo: "Tablero de Consumo Silver",
       tipo: "bi",
       descripcion: "Dashboard de Power BI con participación de consumo por sectores.",
-      miniatura: "assets/thumb-bi.jpg",
-      url: "assets/placeholder-bi.html",
+      miniatura: "assets/img/recursos/thumb-bi.jpg",
+      url: "assets/placeholders/placeholder-bi.html",
       size: "full",
     },
     {
@@ -36,8 +36,8 @@
       titulo: "Informe: Ciudades Amigables",
       tipo: "pdf",
       descripcion: "Análisis de infraestructura en los 3 casos testigo analizados.",
-      miniatura: "assets/thumb-pdf.jpg",
-      url: "assets/informe-marzo.pdf",
+      miniatura: "assets/img/recursos/thumb-pdf.jpg",
+      url: "assets/pdfs/informe-marzo.pdf",
       size: "xl",
     },
   ];
@@ -57,6 +57,61 @@
 
   function getResourceById(id) {
     return RESOURCES.find((r) => r.id === id);
+  }
+
+  
+  function getResourceBySlug(slug) {
+    const s = String(slug || "").trim();
+    if (!s) return undefined;
+    return RESOURCES.find((r) => r.slug === s);
+  }
+
+  function getRequestedResourceKey() {
+    try {
+      const url = new URL(window.location.href);
+      const key = url.searchParams.get("r");
+      return key ? key.trim() : null;
+    } catch {
+      return null;
+    }
+  }
+
+  function resolveResourceFromKey(key) {
+    const k = String(key || "").trim();
+    if (!k) return undefined;
+
+    // Permite: ?r=3 (id numérico) o ?r=mi-slug
+    const asNum = Number(k);
+    if (Number.isFinite(asNum)) return getResourceById(asNum);
+
+    return getResourceBySlug(k);
+  }
+
+  function setResourceDeepLink(resource) {
+    try {
+      const url = new URL(window.location.href);
+      const value = resource?.slug ? String(resource.slug) : String(resource?.id ?? "");
+      if (!value) return;
+
+      url.searchParams.set("r", value);
+      const qs = url.searchParams.toString();
+      history.replaceState({}, "", url.pathname + (qs ? "?" + qs : "") + url.hash);
+    } catch {
+      // noop
+    }
+  }
+
+  function clearResourceDeepLink() {
+    try {
+      const url = new URL(window.location.href);
+      if (!url.searchParams.has("r")) return;
+
+      url.searchParams.delete("r");
+      const qs = url.searchParams.toString();
+      history.replaceState({}, "", url.pathname + (qs ? "?" + qs : "") + url.hash);
+    } catch {
+      // noop
+    }
   }
 
   function defaultModalSizeFor(resource) {
@@ -176,10 +231,18 @@ if (normalized === "screen" || normalized === "fullscreen") {
     const modalBody = $("#modal-body");
     const modalTitle = $("#modal-title");
     const closeBtn = $("#modal-close");
+    const openNewTab = $("#modal-open-newtab");
 
     if (!modal || !modalBody || !modalTitle) return;
 
     modalTitle.textContent = resource.titulo;
+
+    // Botón "Abrir en pestaña nueva"
+    if (openNewTab) {
+      openNewTab.href = normalizeUrl(resource.url);
+      openNewTab.classList.remove("hidden");
+    }
+
 
     // Modal size
     applyModalSize(defaultModalSizeFor(resource));
@@ -201,6 +264,9 @@ if (normalized === "screen" || normalized === "fullscreen") {
     modalBody.appendChild(iframe);
     modal.classList.remove("hidden");
 
+    // Deep-link: permite compartir URL directa al recurso
+    setResourceDeepLink(resource);
+
     // UX: foco en cerrar
     closeBtn?.focus();
   }
@@ -213,6 +279,15 @@ if (normalized === "screen" || normalized === "fullscreen") {
 
     modal.classList.add("hidden");
     modalBody.textContent = "";
+
+    const openNewTab = $("#modal-open-newtab");
+    if (openNewTab) {
+      openNewTab.href = "#";
+      // se mantiene visible para consistencia; si preferís ocultar: openNewTab.classList.add("hidden");
+    }
+
+    // Limpia el deep-link al cerrar
+    clearResourceDeepLink();
   }
 
   function bindModalEvents() {
@@ -308,6 +383,7 @@ if (normalized === "screen" || normalized === "fullscreen") {
         .filter((r) => r && Number.isFinite(Number(r.id)))
         .map((r) => ({
           id: Number(r.id),
+          slug: (r.slug ? String(r.slug).trim() : `recurso-${Number(r.id)}`),
           titulo: String(r.titulo ?? ""),
           tipo: String(r.tipo ?? ""),
           descripcion: String(r.descripcion ?? ""),
@@ -331,5 +407,9 @@ if (normalized === "screen" || normalized === "fullscreen") {
     bindMobileMenu();
     bindResourceEvents();
     await loadResourcesFromJson();
+
+    const requested = getRequestedResourceKey();
+    const res = requested ? resolveResourceFromKey(requested) : undefined;
+    if (res) openResource(res.id);
   });
 })();
