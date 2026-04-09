@@ -239,9 +239,13 @@ if (normalized === "screen" || normalized === "fullscreen") {
 
     // Botón "Abrir en pestaña nueva"
     if (openNewTab) {
-      openNewTab.href = normalizeUrl(resource.url);
-      openNewTab.classList.remove("hidden");
-    }
+  const target = resource.openUrl && String(resource.openUrl).trim()
+    ? resource.openUrl
+    : resource.url;
+
+  openNewTab.href = normalizeUrl(target);
+  openNewTab.classList.remove("hidden");
+}
 
 
     // Modal size
@@ -389,6 +393,7 @@ if (normalized === "screen" || normalized === "fullscreen") {
           descripcion: String(r.descripcion ?? ""),
           miniatura: String(r.miniatura ?? ""),
           url: String(r.url ?? ""),
+          openUrl: r.openUrl ? String(r.openUrl ?? "") : undefined,
           size: r.size ? String(r.size) : undefined,
         }));
 
