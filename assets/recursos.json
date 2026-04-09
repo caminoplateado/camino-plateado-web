@@ -8,5 +8,17 @@
     "url": "https://evolucion60plus.caminoplateado.com/",
     "size": "screen",
     "slug": "mapa-demografia-regional"
+  },
+
+  {
+    "id": 2,
+    "titulo": "Características y evolución de los 50+",
+    "tipo": "bi",
+    "descripcion": "Caracterización de la población 50+ en Argentina en base a datos recopilados de EPH",
+    "miniatura": "assets/img/recursos/thumb-bi.jpg",
+    "url": "https://app.powerbi.com/view?r=eyJrIjoiMGE4ZjJiNGMtM2ZkMi00MmFkLWI0ZmYtMjI0MjA4MDU4NTYxIiwidCI6IjNiN2JhOGYzLTIyMGQtNDM4Yy1hM2Q1LTIwNzEyNWY4ZmZkMCJ9",
+    "size": "screen",
+    "slug": "mapa-demografia-regional"
   }
+
 ]
