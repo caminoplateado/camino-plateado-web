@@ -24,11 +24,11 @@
 
   {
     "id": 3,
-    "titulo": "Evolución del empleo",
+    "titulo": "Estado y evolución del empleo en Argentina",
     "tipo": "bi",
     "descripcion": "Caracterización de la población y el empleo Argentina en base a datos recopilados de EPH",
     "miniatura": "assets/img/recursos/thumb-bi.jpg",
-    "url": "https://app.powerbi.com/view?r=eyJrIjoiNmQzOWI0OWMtNjVlNS00MGQ1LTgxMWEtMWQ1MTU2MDExZTY5IiwidCI6IjNiN2JhOGYzLTIyMGQtNDM4Yy1hM2Q1LTIwNzEyNWY4ZmZkMCJ9",
+    "url": "https://app.powerbi.com/view?r=eyJrIjoiYWYwOGNiZDUtODM0Mi00YTZhLWJkYjYtNjZmNjA4NGU1MDc3IiwidCI6IjNiN2JhOGYzLTIyMGQtNDM4Yy1hM2Q1LTIwNzEyNWY4ZmZkMCJ9",
     "openUrl": "https://evoluciondelempleo.caminoplateado.com/",
     "size": "screen",
     "slug": "tablero-evolucion-empleo"
