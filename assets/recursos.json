@@ -41,7 +41,8 @@
       "descripcion": "Análisis de la situación financiera en América Latina en base a datos del Banco Mundial",
       "miniatura": "assets/img/recursos/thumb-pdf.jpg",
       "url": "assets/pdfs/inclusión-financiera-latam-camino-plateado.pdf",
-      "size": "xl"
+      "size": "xl",
+      "slug": "informe-inclusion-financiera-latam"
     }
 
 ]
