@@ -32,6 +32,16 @@
     "openUrl": "https://evoluciondelempleo.caminoplateado.com/",
     "size": "screen",
     "slug": "tablero-evolucion-empleo"
-  }
+  },
+
+  {
+      "id": 4,
+      "titulo": "Inclusión financiera plateada en América Latina",
+      "tipo": "pdf",
+      "descripcion": "Análisis de la situación financiera en América Latina en base a datos del Banco Mundial",
+      "miniatura": "assets/img/recursos/thumb-pdf.jpg",
+      "url": "assets/pdfs/inclusión-financiera-latam-camino-plateado.pdf",
+      "size": "xl"
+    }
 
 ]
